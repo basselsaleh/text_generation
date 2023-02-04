@@ -1,0 +1,8 @@
+name: text-gen
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - numpy
+  - scipy
+  - matplotlib
