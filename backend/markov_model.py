@@ -2,28 +2,29 @@ import os
 import random
 
 class MarkovModel:
-    '''
-    Parameters:
-    -----------------
-    k   :   kernel size, i.e. how many characters to condition model prediction on
-    '''
+    
     def __init__(self, k=1):
+        '''
+        Parameters:
+        -----------------
+        k   :   kernel size, i.e. how many characters to condition model prediction on
+        '''
         self.k = k
 
-    '''
-    Load source text from source_dir. Default behavior here is that any files in source_dir
-    will be read as text and joined together into one big string
-
-    Parameters:
-    -----------------
-    source_dir  :   directory to read text from
-
-    Returns:
-    -----------------
-    full_text   :   all the text from all the files in source_dir, joined into one string
-    content     :   content of each file stored separately in a list
-    '''
     def load_text(self, source_dir):
+        '''
+        Load source text from source_dir. Default behavior here is that any files in source_dir
+        will be read as text and joined together into one big string
+
+        Parameters:
+        -----------------
+        source_dir  :   directory to read text from
+
+        Returns:
+        -----------------
+        full_text   :   all the text from all the files in source_dir, joined into one string
+        content     :   content of each file stored separately in a list
+        '''
         entries = os.listdir(source_dir)
         entries.sort()
         content = []
@@ -35,16 +36,16 @@ class MarkovModel:
 
         return self.full_text, content
     
-    '''
-    Build the lookup table for frequency of character occurances. This is the distribution from which we will
-    draw new characters when generating text.
-
-    Returns:
-    -----------------
-    lookup      :   lookup table as nested dictionaries. e.g. lookup['e'] will be dictionary of all possible characters that follow
-                    'e', where the values are the number of occurances of that character
-    '''
     def build_lookup(self):
+        '''
+        Build the lookup table for frequency of character occurances. This is the distribution from which we will
+        draw new characters when generating text.
+
+        Returns:
+        -----------------
+        lookup      :   lookup table as nested dictionaries. e.g. lookup['e'] will be dictionary of all possible characters that follow
+                        'e', where the values are the number of occurances of that character
+        '''
         assert self.full_text is not None
 
         k = self.k
@@ -68,16 +69,16 @@ class MarkovModel:
         self.lookup = lookup
         return lookup
     
-    '''
-    Generate new text, given a starting seed and desired length
-
-    Parameters:
-    -----------------
-    seed    :   starting seed, a string of k characters that needs to appear somewhere in the source text
-    length  :   desired length of generated text
-    outfile :   if provided, generated text will be saved to this file. otherwise it will be printed to the console
-    '''
     def generate_text(self, seed, length, outfile=None):
+        '''
+        Generate new text, given a starting seed and desired length
+
+        Parameters:
+        -----------------
+        seed    :   starting seed, a string of k characters that needs to appear somewhere in the source text
+        length  :   desired length of generated text
+        outfile :   if provided, generated text will be saved to this file. otherwise it will be printed to the console
+        '''
         assert len(seed) == self.k
         assert seed in self.full_text
         assert self.lookup is not None
