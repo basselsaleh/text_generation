@@ -1,3 +1,7 @@
-# ChatMC
+# CatGPT
 
-Kind of a cheeky name to pay homage to the current popularity of the extremely powerful ChatGPT. In this project we're going to try to build a much simpler chat bot, using Markov chains to predict text.
+Check out my [blog post](https://climbingthegiant.com/posts/catGPT/) for a rundown of this project.
+
+### To do:
+
+Turn this skeleton code into a Flask app and write a JavaScript frontend to run on my website.
