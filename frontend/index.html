@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Testing CatGPT Web App </title>
+        <title> CatGPT </title>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
 
     <body>
         <h1> Welcome to CatGPT </h1>
+        A simple and silly Markov-chain based chat bot, created by Bassel Saleh.<br>
+        <a href="https://climbingthegiant.com/posts/catGPT/">Click here for more info</a>
 
-        <div class="chat" id="chat">
-            <div class="message from-user">
+        <div class="chat-container">
+            <div class="chat" id="chat">
+                <div class="message from-catgpt">
+                    Hello th— I mean... meow. My name is CatGPT. What can I help you with today?
+                </div>
+            </div>
+            <div class="message user-input">
                 <form>
-                    <label for="input_text"> > </label>
-                    <input type="text" id="input_text" name="input_text" size="100">
+                    <label for="input_text"></label>
+                    <input type="text" id="input_text" name="input_text">
                     <!-- <button type="button" onclick="getResponse()" id="submit"></button> -->
                 </form>
             </div>
-            <!-- <div class="message from-catgpt" id="response_text">
-                Test bot output
-            </div> -->
         </div>
 
         <script>
@@ -28,6 +32,7 @@
                     event.preventDefault();
                     // document.getElementById("submit").click();
                     getResponse();
+                    input.value = "";
                 }
             })
 
@@ -51,7 +56,8 @@
                 messageDiv.className = "message " + (from === "user" ? "from-user" : "from-catgpt");
                 messageDiv.innerHTML = text;
                 var chatDiv = document.getElementById("chat");
-                chatDiv.appendChild(messageDiv);
+                // chatDiv.appendChild(messageDiv);
+                chatDiv.insertBefore(messageDiv, chatDiv.firstChild)
             }
         </script>
     </body>

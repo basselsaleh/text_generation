@@ -73,6 +73,8 @@ def app_response():
     else:
         seed = random.choice(seeds)
 
+    print(seed)
+
     # generate a response of length 500 (or whatever you want)
     response = generate_text(lookup, k, length=500, seed=seed)
 

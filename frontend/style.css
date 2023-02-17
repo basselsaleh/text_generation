@@ -1,7 +1,15 @@
-.chat {
+html, body {
+    height: 100%;
+    margin: 10;
+    padding: 10;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    overflow-y: hidden;
+}
+
+.chat-container {
     display: flex;
-    flex-direction: column;
-    height: 800px;
+    flex-direction: column-reverse;
+    height: 80%;
     overflow-y: auto;
     margin: 0 auto;
     background-color: rgb(171, 205, 206);
@@ -10,11 +18,33 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
+.chat {
+    display: flex;
+    flex-direction: column-reverse;
+    padding-bottom: 90px;
+}
+
 .message {
     padding: 10px;
-    margin: 10px 300px;
+    margin: 10px 25%;/*10px 300px; */
     max-width: 70%;
     border-radius: 5px;
+}
+
+.user-input {
+    background-color: #77a6d3;
+    color: white;
+    align-self: flex-start;
+    position: fixed;
+    width: 40%;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    background-color: #eff4f8;
 }
 
 .from-user {
