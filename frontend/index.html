@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Testing CatGPT Web App </title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+        <h1> Welcome to CatGPT </h1>
+
+        <div class="chat" id="chat">
+            <div class="message from-user">
+                <form>
+                    <label for="input_text"> > </label>
+                    <input type="text" id="input_text" name="input_text" size="100">
+                    <!-- <button type="button" onclick="getResponse()" id="submit"></button> -->
+                </form>
+            </div>
+            <!-- <div class="message from-catgpt" id="response_text">
+                Test bot output
+            </div> -->
+        </div>
+
+        <script>
+            var input = document.getElementById("input_text");
+            input.addEventListener("keypress", function(event) {
+                if(event.key === "Enter") {
+                    event.preventDefault();
+                    // document.getElementById("submit").click();
+                    getResponse();
+                }
+            })
+
+            function getResponse() {
+                const inputText = document.getElementById("input_text").value;
+                addMessage("user", inputText);
+
+                fetch("http://localhost:6969/generate-response", {
+                    method: "POST",
+                    body: inputText
+                })
+                .then(response => response.text())
+                .then(data => {
+                    // document.getElementById("response_text").innerHTML = data;
+                    addMessage("catgpt", data);
+                });
+            }
+
+            function addMessage(from, text) {
+                var messageDiv = document.createElement("div");
+                messageDiv.className = "message " + (from === "user" ? "from-user" : "from-catgpt");
+                messageDiv.innerHTML = text;
+                var chatDiv = document.getElementById("chat");
+                chatDiv.appendChild(messageDiv);
+            }
+        </script>
+    </body>
+</html>

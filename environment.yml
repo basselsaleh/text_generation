@@ -6,4 +6,6 @@ dependencies:
   - numpy
   - scipy
   - matplotlib
-  - wikipedia
+  - wikipediaapi
+  - flask
+  - flask-cors

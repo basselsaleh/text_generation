@@ -41,7 +41,7 @@ def build_lookup(source_text, k):
 def generate_text(lookup, k, length, seed):
     assert len(seed) == k
 
-    x = seed; text = x
+    text = seed
     for i in range(k, length):
         x = text[i-k:]
 
@@ -54,12 +54,6 @@ def generate_text(lookup, k, length, seed):
     return text
 
 def main():
-    # wiki = wikipediaapi.Wikipedia('en', extract_format=wikipediaapi.ExtractFormat.WIKI)
-
-    # cat_category = wiki.page('Category:Cats')
-    # print([p for p in cat_category.categorymembers.keys() if ':' not in p])
-
-    # exit()
     source_text = load_wiki('Category:Cats')
     nltk.download('stopwords')
     stops = set(stopwords.words('english'))
@@ -69,7 +63,7 @@ def main():
 
     lookup = build_lookup(source_text, k)
 
-    print('Hello, my name is CatGPT (Catastrophically Garbled Program Talker). What can I help you with today?')
+    print('\nHello, my name is CatGPT. What can I help you with today?')
     
     while True:
         input_text = input('\n> ')
@@ -78,7 +72,6 @@ def main():
 
         words = re.findall(r"[\w']+|[.,!?;]", input_text.lower().translate(str.maketrans('','',string.punctuation)))
         keywords = list(filter(lambda w: not w in stops, words))
-        print(keywords)
 
         seeds = []
         for w in keywords:
@@ -93,7 +86,7 @@ def main():
                 
                 seeds.append(padded)
         
-        # if for some reason no match was found, set the seed as start
+        # if for some reason no match was found, set the seed as start of text
         if not seeds:
             seed = source_text[0:k]
         else:
@@ -107,6 +100,23 @@ def main():
         response = response[0].upper() + response[1:last_period+1]
 
         print('\n' + response)
+
+def main2():
+    import json
+
+    #source_text = 'The cat (Felis catus)'# is a domestic species of small carnivorous mammal.'# It is the only domesticated species in the family Felidae and is commonly referred to as the domestic cat or house cat to distinguish it from the wild members of the family. Cats are commonly kept as house pets but can also be farm cats or feral cats; the feral cat ranges freely and avoids human contact. Domestic cats are valued by humans for companionship and their ability to kill rodents. About 60 cat breeds are recognized by various cat registries.'
+    source_text = 'hello there'
+
+    k = 2
+
+    lookup = build_lookup(source_text, k)
+
+    print(json.dumps(lookup, indent=4))
+
+    # seed = source_text[:k]
+    # new_text = generate_text(lookup, k=k, length=100, seed=seed)
+
+    # print(new_text)
 
 if __name__ == '__main__':
     main()
