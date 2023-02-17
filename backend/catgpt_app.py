@@ -1,5 +1,5 @@
 from flask import Flask, request
-from flask_cors import CORS
+# from flask_cors import CORS
 
 import re
 import string
@@ -10,7 +10,7 @@ from nltk.corpus import stopwords
 from cmd_line_app import load_wiki, build_lookup, generate_text
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
 source_text = None
 stops = None
@@ -89,4 +89,4 @@ def app_response():
 
 if __name__ == '__main__':
     initialize_app()
-    app.run('localhost', 6969)
+    app.run()
