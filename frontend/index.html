@@ -5,16 +5,16 @@
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
 
-    <body>
+    <body onload="welcomeMessage()">
         <h1> Welcome to CatGPT </h1>
-        A simple and silly Markov-chain based chat bot, created by Bassel Saleh.<br>
+        A simple and silly Markov-chain based cat-obsessed chat bot, created by Bassel Saleh.<br>
         <a href="https://climbingthegiant.com/posts/catGPT/">Click here for more info</a>
 
         <div class="chat-container">
             <div class="chat" id="chat">
-                <div class="message from-catgpt">
+                <!-- <div class="message from-catgpt">
                     Hello th— I mean... meow. My name is CatGPT. What can I help you with today?
-                </div>
+                </div> -->
             </div>
             <div class="message user-input">
                 <form>
@@ -51,13 +51,28 @@
                 });
             }
 
-            function addMessage(from, text) {
+            async function addMessage(from, text) {
                 var messageDiv = document.createElement("div");
                 messageDiv.className = "message " + (from === "user" ? "from-user" : "from-catgpt");
-                messageDiv.innerHTML = text;
                 var chatDiv = document.getElementById("chat");
                 // chatDiv.appendChild(messageDiv);
                 chatDiv.insertBefore(messageDiv, chatDiv.firstChild)
+
+                // if text is from bot, animate it
+                if(from === "catgpt") {
+                    var speed = 10; // how long to wait between chars in ms
+                    for(var i=0; i < text.length; i++) {
+                        await new Promise(r => setTimeout(r, speed))
+                        messageDiv.innerHTML += text.charAt(i);
+                    }
+                } else {
+                    messageDiv.innerHTML = text;
+                }
+            }
+
+            function welcomeMessage() {
+                const welcomeText = "Hello th— I mean... meow. My name is CatGPT. What can I help you with today?";
+                addMessage("catgpt", welcomeText);
             }
         </script>
     </body>

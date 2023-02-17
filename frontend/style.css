@@ -57,4 +57,11 @@ input {
     background-color: #f1f1f1;
     color: black;
     align-self: flex-start;
+    /* overflow: hidden;
+    animation: animated-text 2s steps(29,end) 1s 1 normal both; */
 }
+
+/* @keyframes animated-text {
+    from{width: 0;}
+    to{width: 50%;}
+} */
