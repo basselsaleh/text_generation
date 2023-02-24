@@ -40,7 +40,7 @@
                 const inputText = document.getElementById("input_text").value;
                 addMessage("user", inputText);
 
-                fetch("http://localhost:6969/generate-response", {
+                fetch("http://localhost:8080/generate-response", {
                     method: "POST",
                     body: inputText
                 })

@@ -1,5 +1,5 @@
 from flask import Flask, request
-# from flask_cors import CORS
+from flask_cors import CORS
 
 import re
 import string
@@ -10,7 +10,7 @@ from nltk.corpus import stopwords
 from cmd_line_app import load_wiki, build_lookup, generate_text
 
 app = Flask(__name__)
-# CORS(app)
+CORS(app)
 
 source_text = None
 stops = None
@@ -28,7 +28,9 @@ def initialize_app():
     source_text = load_wiki('Category:Cats')
 
     # use nltk to download the set of stopwords
-    nltk.download('stopwords')
+    #nltk.download('stopwords', download_dir='./backend')
+    nltk.data.path = ['./backend/nltk_data']
+    print('Successfully found nltk corpus')
     stops = set(stopwords.words('english'))
 
     # set kernel size. I'm a fan of k = 10
@@ -73,8 +75,6 @@ def app_response():
     else:
         seed = random.choice(seeds)
 
-    print(seed)
-
     # generate a response of length 500 (or whatever you want)
     response = generate_text(lookup, k, length=500, seed=seed)
 
@@ -89,4 +89,4 @@ def app_response():
 
 if __name__ == '__main__':
     initialize_app()
-    app.run()
+    app.run('localhost', 8080, debug=True)
