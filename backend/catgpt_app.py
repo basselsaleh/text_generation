@@ -28,7 +28,7 @@ def initialize_app():
     source_text = load_wiki('Category:Cats')
 
     # use nltk to download the set of stopwords
-    #nltk.download('stopwords', download_dir='./backend')
+    # nltk.download('stopwords', download_dir='./backend')
     nltk.data.path = ['./backend/nltk_data']
     print('Successfully found nltk corpus')
     stops = set(stopwords.words('english'))
@@ -89,4 +89,5 @@ def app_response():
 
 if __name__ == '__main__':
     initialize_app()
-    app.run('localhost', 8080, debug=True)
+    #app.run('localhost', 8080, debug=True)
+    app.run()

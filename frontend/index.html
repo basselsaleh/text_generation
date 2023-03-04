@@ -40,8 +40,10 @@
                 const inputText = document.getElementById("input_text").value;
                 addMessage("user", inputText);
 
-                fetch("http://localhost:8080/generate-response", {
+                //fetch("http://localhost:8080/generate-response", {
+                fetch("https://pure-meridian-378121.uc.r.appspot.com/generate-response", {
                     method: "POST",
+                    mode: "cors",
                     body: inputText
                 })
                 .then(response => response.text())
@@ -71,7 +73,7 @@
             }
 
             function welcomeMessage() {
-                const welcomeText = "Hello th— I mean... meow. My name is CatGPT. What can I help you with today?";
+                const welcomeText = "Hello th- I mean... meow. My name is CatGPT. What can I help you with today?";
                 addMessage("catgpt", welcomeText);
             }
         </script>
