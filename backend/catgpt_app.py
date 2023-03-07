@@ -90,4 +90,4 @@ def app_response():
 if __name__ == '__main__':
     initialize_app()
     #app.run('localhost', 8080, debug=True)
-    app.run()
+    app.run('0.0.0.0', 8080)
